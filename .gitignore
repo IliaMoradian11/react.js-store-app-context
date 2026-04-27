@@ -22,7 +22,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-# products list and products pictures
-assets/*
-services/constants/*

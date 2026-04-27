@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 200px;
+}
+.container h2 {
+  font-size: 12rem;
+  height: fit-content;
+  line-height: 12rem;
+}
+.container p {
+  font-size: 2.5rem;
+  margin-top: 5px;
+}
+.container button {
+  border: none;
+  font-size: 1.1rem;
+  background-color: #fe5d42;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-top: 40px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.container button:hover {
+  opacity: 0.8;
+}
