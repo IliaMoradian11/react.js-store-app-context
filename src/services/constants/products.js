@@ -13,7 +13,7 @@ import img12 from "../../assets/women's_clothing.webp";
 import img13 from "../../assets/women's_dress.webp";
 import img14 from "../../assets/women's_t_shirt.webp";
 
-const data = JSON.stringify([
+const data = [
   {
     id: 1,
     title: "USB Drive 3.1",
@@ -106,6 +106,6 @@ const data = JSON.stringify([
     price: 48,
     category: "women's clothing",
   },
-]);
+];
 
 export { data };

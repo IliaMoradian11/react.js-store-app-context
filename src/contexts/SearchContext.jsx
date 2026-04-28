@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useState } from "react";
 import { createContext } from "react";
 
 import { data as products } from "../services/constants/products";
@@ -36,10 +36,19 @@ function categoryReducer(state, action) {
 function SearchContext({ children }) {
   const [search, dispatchSearch] = useReducer(searchReducer, "");
   const [category, dispatchCategory] = useReducer(categoryReducer, "");
+  const [toSearchText, setToSearchText] = useState("");
 
   return (
     <context.Provider
-      value={{ search, dispatchSearch, products, category, dispatchCategory }}
+      value={{
+        search,
+        dispatchSearch,
+        products,
+        category,
+        dispatchCategory,
+        toSearchText,
+        setToSearchText,
+      }}
     >
       {children}
     </context.Provider>

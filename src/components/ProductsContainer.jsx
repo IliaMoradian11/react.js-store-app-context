@@ -1,16 +1,11 @@
-import { useContext } from "react";
-
-import { context } from "../contexts/SearchContext";
-
 import styles from "./ProductsContainer.module.css";
 import { TbListDetails, TbShoppingBagCheck } from "react-icons/tb";
 import { Link } from "react-router-dom";
 
-function ProductsContainer() {
-  const { products } = useContext(context);
+function ProductsContainer({ productsToShow }) {
   return (
     <div className={styles.container}>
-      {JSON.parse(products).map((product) => (
+      {productsToShow.map((product) => (
         <div key={product.id} className={styles.product}>
           <img src={product.image} alt={product.title} />
           <p className={styles.title}>{product.title}</p>

@@ -6,7 +6,8 @@ import { context } from "../contexts/SearchContext";
 import styles from "./SearchBox.module.css";
 
 function SearchBox({ searchParams, setSearchParams }) {
-  const { search, dispatchSearch, category } = useContext(context);
+  const { search, dispatchSearch, category, setToSearchText } =
+    useContext(context);
 
   useEffect(() => {
     const searchQuery = searchParams.get("search");
@@ -20,15 +21,17 @@ function SearchBox({ searchParams, setSearchParams }) {
 
   function searchHandler(e) {
     e.preventDefault();
-    if (search && category !== "all") {
+    console.log(category);
+    if (search && category) {
       setSearchParams({ category, search });
     } else if (search) {
       setSearchParams({ search });
-    } else if (category === "all") {
+    } else if (category) {
       setSearchParams({ category });
     } else {
       setSearchParams({});
     }
+    setToSearchText(search);
   }
 
   return (

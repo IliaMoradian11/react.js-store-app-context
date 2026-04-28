@@ -22,7 +22,7 @@ function FilterProducts({ searchParams, setSearchParams }) {
       setSearchParams({ category: value, search });
     } else if (search) {
       setSearchParams({ search });
-    } else if (value === "all") {
+    } else if (value !== "all") {
       setSearchParams({ category: value });
     } else {
       setSearchParams({});
