@@ -1,6 +1,7 @@
 import { useReducer } from "react";
-
 import { createContext } from "react";
+
+import { data as products } from "../services/constants/products";
 
 export const searchTextContext = createContext();
 
@@ -17,7 +18,7 @@ function SearchContext({ children }) {
   const [search, dispatchSearch] = useReducer(reducer, "");
 
   return (
-    <searchTextContext.Provider value={{ search, dispatchSearch }}>
+    <searchTextContext.Provider value={{ search, dispatchSearch, products }}>
       {children}
     </searchTextContext.Provider>
   );
