@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import { context } from "../contexts/SearchContext";
 
+import Layout from "../layouts/Layout";
 import SearchBox from "../components/SearchBox";
 import ProductsContainer from "../components/ProductsContainer";
 import FilterProducts from "../components/FilterProducts";
@@ -31,7 +32,7 @@ function ProductsPage() {
   }, [toSearchText, category]);
 
   return (
-    <>
+    <Layout>
       <SearchBox
         searchParams={searchParams}
         setSearchParams={setSearchParams}
@@ -46,7 +47,7 @@ function ProductsPage() {
           setSearchParams={setSearchParams}
         />
       </StyledDiv>
-    </>
+    </Layout>
   );
 }
 

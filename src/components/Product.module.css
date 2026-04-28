@@ -1,0 +1,45 @@
+.product {
+  background: #fff;
+  border: 2px dashed silver;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  border-radius: 15px;
+}
+.product .title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fe5d42;
+  margin: 10px 0;
+}
+.product .price {
+  color: #505050;
+  margin-bottom: 30px;
+}
+.product img {
+  border-radius: 10px;
+}
+.product div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.product div button {
+  background-color: #fe5d42;
+  border: none;
+  border-radius: 5px;
+  width: 32px;
+  height: 32px;
+  transition: all 0.2s ease-in-out;
+}
+.product div button:hover {
+  opacity: 0.8;
+}
+.product button,
+.product a {
+  cursor: pointer;
+}
+.count {
+  font-size: 1rem;
+  margin: 0 15px;
+}

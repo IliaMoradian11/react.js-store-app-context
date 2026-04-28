@@ -4,6 +4,7 @@ import ProductsPage from "./pages/ProductsPage";
 import PageNotFoundPage from "./pages/PageNotFoundPage";
 import SearchContext from "./contexts/SearchContext";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
+import CartPage from "./pages/CartPage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route index element={<Navigate to={"/products"} replace={true} />} />
           <Route path="products" element={<ProductsPage />} />
           <Route path="products/:id" element={<ProductDetailsPage />} />
+          <Route path="cart" element={<CartPage />} />
           <Route path="*" element={<PageNotFoundPage />} />
         </Routes>
       </BrowserRouter>

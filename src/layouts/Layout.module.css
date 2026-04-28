@@ -1,0 +1,29 @@
+.header,
+.footer {
+  background-color: #fe5d42;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+.header {
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header a {
+  background-color: #fff;
+  padding: 3px;
+  height: 36px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.header a:hover {
+  opacity: 0.9;
+}
+.footer {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 100px;
+}

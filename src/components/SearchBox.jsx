@@ -11,8 +11,10 @@ function SearchBox({ searchParams, setSearchParams }) {
 
   useEffect(() => {
     const searchQuery = searchParams.get("search");
-    if (searchQuery)
+    if (searchQuery) {
       dispatchSearch({ type: "setNewValue", payload: searchQuery });
+      setToSearchText(searchQuery);
+    }
   }, []);
 
   function inputChangeHandler(e) {
@@ -21,7 +23,6 @@ function SearchBox({ searchParams, setSearchParams }) {
 
   function searchHandler(e) {
     e.preventDefault();
-    console.log(category);
     if (search && category) {
       setSearchParams({ category, search });
     } else if (search) {

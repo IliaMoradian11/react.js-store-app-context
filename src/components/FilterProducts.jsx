@@ -10,7 +10,7 @@ function FilterProducts({ searchParams, setSearchParams }) {
   const { category, dispatchCategory, search } = useContext(context);
 
   useEffect(() => {
-    const searchQuery = searchParams.get("search");
+    const searchQuery = searchParams.get("category");
     if (searchQuery)
       dispatchCategory({ type: "setNewValue", payload: searchQuery });
   }, []);

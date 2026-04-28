@@ -33,7 +33,37 @@ function categoryReducer(state, action) {
   }
 }
 
+function addProduct(state, action) {
+  return state.find((product) => product.id === action.payload.id)
+    ? state.map((product) => {
+        if (product.id !== action.payload.id) return product;
+        return { ...product, count: product.count + 1 };
+      })
+    : [...state, { ...action.payload, count: 1 }];
+}
+
+function removeProduct(state, action) {
+  return state.find((product) => product.id === action.payload.id)
+    ? state.map((product) => {
+        if (product.id !== action.payload.id) return product;
+        return { ...product, count: product.count - 1 };
+      })
+    : state.filter((product) => product.id !== action.payload.id);
+}
+
+function cartReducer(state, action) {
+  switch (action.type) {
+    case "add":
+      return addProduct(state, action);
+    case "remove":
+      return removeProduct(state, action);
+    default:
+      throw new Error("The value you pass to reducer is not valid");
+  }
+}
+
 function SearchContext({ children }) {
+  const [cart, dispatchCart] = useReducer(cartReducer, []);
   const [search, dispatchSearch] = useReducer(searchReducer, "");
   const [category, dispatchCategory] = useReducer(categoryReducer, "");
   const [toSearchText, setToSearchText] = useState("");
@@ -48,6 +78,8 @@ function SearchContext({ children }) {
         dispatchCategory,
         toSearchText,
         setToSearchText,
+        cart,
+        dispatchCart,
       }}
     >
       {children}
