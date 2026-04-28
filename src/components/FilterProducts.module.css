@@ -1,0 +1,36 @@
+.container {
+  width: calc(20% - 20px);
+  margin-left: 20px;
+  height: fit-content;
+  background-color: #fff;
+  border: 2px dashed silver;
+  border-radius: 15px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+}
+.container .header {
+  color: #fe5d42;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.container .header svg {
+  margin-right: 5px;
+}
+.container button {
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: none;
+  background-color: #fff;
+  text-align: left;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s linear;
+}
+.active {
+  color: #fe5d42;
+  background-color: #faddd8 !important;
+}

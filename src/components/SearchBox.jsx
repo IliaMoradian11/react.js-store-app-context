@@ -1,12 +1,12 @@
 import { useContext, useEffect } from "react";
 import { BiSearch } from "react-icons/bi";
 
-import { searchTextContext } from "../contexts/SearchContext";
+import { context } from "../contexts/SearchContext";
 
 import styles from "./SearchBox.module.css";
 
 function SearchBox({ searchParams, setSearchParams }) {
-  const { search, dispatchSearch } = useContext(searchTextContext);
+  const { search, dispatchSearch, category } = useContext(context);
 
   useEffect(() => {
     const searchQuery = searchParams.get("search");
@@ -20,7 +20,15 @@ function SearchBox({ searchParams, setSearchParams }) {
 
   function searchHandler(e) {
     e.preventDefault();
-    search ? setSearchParams({ search }) : setSearchParams({});
+    if (search && category !== "all") {
+      setSearchParams({ category, search });
+    } else if (search) {
+      setSearchParams({ search });
+    } else if (category === "all") {
+      setSearchParams({ category });
+    } else {
+      setSearchParams({});
+    }
   }
 
   return (

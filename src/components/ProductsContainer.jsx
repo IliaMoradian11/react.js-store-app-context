@@ -1,13 +1,13 @@
 import { useContext } from "react";
 
-import { searchTextContext } from "../contexts/SearchContext";
+import { context } from "../contexts/SearchContext";
 
 import styles from "./ProductsContainer.module.css";
 import { TbListDetails, TbShoppingBagCheck } from "react-icons/tb";
 import { Link } from "react-router-dom";
 
 function ProductsContainer() {
-  const { products } = useContext(searchTextContext);
+  const { products } = useContext(context);
   return (
     <div className={styles.container}>
       {JSON.parse(products).map((product) => (

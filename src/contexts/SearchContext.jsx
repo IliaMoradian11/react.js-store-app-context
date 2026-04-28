@@ -3,9 +3,9 @@ import { createContext } from "react";
 
 import { data as products } from "../services/constants/products";
 
-export const searchTextContext = createContext();
+export const context = createContext();
 
-function reducer(state, action) {
+function searchReducer(state, action) {
   switch (action.type) {
     case "setNewValue":
       return action.payload;
@@ -14,13 +14,35 @@ function reducer(state, action) {
   }
 }
 
+function categoryReducer(state, action) {
+  switch (action.type) {
+    case "all":
+      return "";
+    case "electronics":
+      return "electronics";
+    case "jewelery":
+      return "jewelery";
+    case "men's clothing":
+      return "men's clothing";
+    case "women's clothing":
+      return "women's clothing";
+    case "setNewValue":
+      return action.payload;
+    default:
+      throw new Error("The value you pass to reducer is not valid");
+  }
+}
+
 function SearchContext({ children }) {
-  const [search, dispatchSearch] = useReducer(reducer, "");
+  const [search, dispatchSearch] = useReducer(searchReducer, "");
+  const [category, dispatchCategory] = useReducer(categoryReducer, "");
 
   return (
-    <searchTextContext.Provider value={{ search, dispatchSearch, products }}>
+    <context.Provider
+      value={{ search, dispatchSearch, products, category, dispatchCategory }}
+    >
       {children}
-    </searchTextContext.Provider>
+    </context.Provider>
   );
 }
 
