@@ -11,7 +11,8 @@
   align-items: center;
   justify-content: space-between;
 }
-.header a {
+.header .linkToCart {
+  position: relative;
   background-color: #fff;
   padding: 3px;
   height: 36px;
@@ -19,11 +20,25 @@
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
-.header a:hover {
+.header .linkToCart:hover {
   opacity: 0.9;
 }
+.header .linkToCart .count {
+  font-size: smaller;
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: #fff;
+  background-color: #000;
+  border-radius: 11px;
+  min-width: 22px;
+  line-height: 22px;
+  height: 22px;
+  text-align: center;
+  transform: translate(50%, -50%);
+}
 .footer {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   text-align: center;
   margin-top: 100px;
 }

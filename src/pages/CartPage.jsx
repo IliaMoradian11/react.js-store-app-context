@@ -1,5 +1,14 @@
+import Layout from "../layouts/Layout";
+import Cart from "../components/Cart";
+
 function CartPage() {
-  return <div>CartPage</div>;
+  return (
+    <>
+      <Layout>
+        <Cart />
+      </Layout>
+    </>
+  );
 }
 
 export default CartPage;

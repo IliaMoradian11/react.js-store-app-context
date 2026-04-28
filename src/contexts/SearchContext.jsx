@@ -43,7 +43,7 @@ function addProduct(state, action) {
 }
 
 function removeProduct(state, action) {
-  return state.find((product) => product.id === action.payload.id)
+  return state.find((product) => product.id === action.payload.id).count !== 1
     ? state.map((product) => {
         if (product.id !== action.payload.id) return product;
         return { ...product, count: product.count - 1 };
