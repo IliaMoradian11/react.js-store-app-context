@@ -1,0 +1,54 @@
+.container {
+  margin-top: 100px;
+  min-height: calc(100vh - 340px);
+  display: flex;
+}
+.container > img {
+  width: calc(30% - 70px);
+  margin-right: 70px;
+  height: fit-content;
+  border-radius: 30px;
+  border: 2px dashed #fe5d42;
+}
+.container > div {
+  position: relative;
+  width: 70%;
+  border-radius: 30px;
+  border: 2px dashed silver;
+  padding: 30px;
+  height: fit-content;
+}
+.container h3 {
+  font-size: 1.75rem;
+  color: #fe5d42;
+  margin-bottom: 25px;
+}
+.container .text {
+  color: #505050;
+  margin-bottom: 20px;
+  text-align: justify;
+  width: calc(100% - 150px);
+  font-size: 1.1rem;
+}
+.container .categoryAndPrice {
+  display: flex;
+  align-items: center;
+}
+.container .categoryAndPrice svg {
+  margin-right: 10px;
+}
+.container a {
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+  background-color: #fe5d42;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.container a:hover {
+  opacity: 0.8;
+}
