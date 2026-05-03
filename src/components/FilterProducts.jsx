@@ -16,60 +16,38 @@ function FilterProducts({ searchParams, setSearchParams }) {
   }, []);
 
   function changeCategoryHandler(e) {
-    const value = e.target.dataset.category;
+    if (e.target.tagName !== "BUTTON") return;
+    const value = e.target.innerText.toLowerCase();
     dispatch({ type: "CATEGORY", payload: value });
-    console.log(filters);
     setSearchParams(
       buildQueryParams({ search: filters.toSearchText, category: value }),
     );
   }
 
+  function isActive(type) {
+    if (filters.category === type) return styles.active;
+    return null;
+  }
+
   return (
-    <ul className={styles.container}>
+    <ul className={styles.container} onClick={changeCategoryHandler}>
       <h4 className={styles.header}>
         <TbCategory color="#fe5d42" size={22} />
         Categories
       </h4>
-      <button
-        type="button"
-        className={filters.category === "" ? styles.active : null}
-        onClick={changeCategoryHandler}
-        data-category=""
-      >
+      <button type="button" className={isActive("all")}>
         All
       </button>
-      <button
-        type="button"
-        className={filters.category === "electronics" ? styles.active : null}
-        onClick={changeCategoryHandler}
-        data-category="electronics"
-      >
+      <button type="button" className={isActive("electronics")}>
         Electronics
       </button>
-      <button
-        type="button"
-        className={filters.category === "jewelery" ? styles.active : null}
-        onClick={changeCategoryHandler}
-        data-category="jewelery"
-      >
+      <button type="button" className={isActive("jewelery")}>
         Jewelery
       </button>
-      <button
-        type="button"
-        className={filters.category === "men's clothing" ? styles.active : null}
-        onClick={changeCategoryHandler}
-        data-category="men's clothing"
-      >
+      <button type="button" className={isActive("men's clothing")}>
         Men's Clothing
       </button>
-      <button
-        type="button"
-        className={
-          filters.category === "women's clothing" ? styles.active : null
-        }
-        onClick={changeCategoryHandler}
-        data-category="women's clothing"
-      >
+      <button type="button" className={isActive("women's clothing")}>
         Women's Clothing
       </button>
     </ul>

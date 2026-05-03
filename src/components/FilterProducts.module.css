@@ -28,7 +28,10 @@
   text-align: left;
   font-size: 1.1rem;
   cursor: pointer;
-  transition: all 0.2s linear;
+  transition: background-color 0.2s linear;
+}
+.container button:hover {
+  color: #fe5d42;
 }
 .active {
   color: #fe5d42;

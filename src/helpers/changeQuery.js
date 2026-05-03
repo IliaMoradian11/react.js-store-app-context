@@ -1,11 +1,10 @@
 function buildQueryParams({ category, search }) {
-  console.log(category, search);
   let searchParams;
-  if (search && category) {
+  if (search && category !== "all") {
     searchParams = { category, search };
   } else if (search) {
     searchParams = { search };
-  } else if (category) {
+  } else if (category !== "all") {
     searchParams = { category };
   } else {
     searchParams = {};

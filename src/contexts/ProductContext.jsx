@@ -8,11 +8,14 @@ import {
 
 import api from "../services/config";
 
-import wordExistenceChecker from "../helpers/wordExistenceChecker";
+import {
+  categoryChecker,
+  wordExistenceChecker,
+} from "../helpers/wordExistence&CategoryChecker";
 
 const productContext = createContext();
 
-const initialState = { toSearchText: "", category: "" };
+const initialState = { toSearchText: "", category: "all" };
 
 function reducer(state, action) {
   switch (action.type) {
@@ -42,7 +45,7 @@ function ProductProvider({ children }) {
       setIsLoading(true);
       const toShowProducts = products.filter(
         (product) =>
-          product.category.includes(filters.category) &&
+          categoryChecker(product.category, filters.category) &&
           wordExistenceChecker(product.title, filters.toSearchText),
       );
       setProductsToShow(toShowProducts);
