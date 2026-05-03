@@ -6,9 +6,9 @@ import {
   createContext,
 } from "react";
 
-import wordExistenceChecker from "../helpers/wordExistenceChecker";
+import api from "../services/config";
 
-import { data } from "../services/constants/products";
+import wordExistenceChecker from "../helpers/wordExistenceChecker";
 
 const productContext = createContext();
 
@@ -26,24 +26,35 @@ function reducer(state, action) {
 }
 
 function ProductProvider({ children }) {
-  const [filters, dispatch] = useReducer(reducer, initialState);
+  const [isLoading, setIsLoading] = useState(true);
   const [products, setProducts] = useState([]);
+  const [filters, dispatch] = useReducer(reducer, initialState);
+  const [productsToShow, setProductsToShow] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      setProducts(await api.get("/products/products.json"));
+    })();
+  }, []);
 
   useEffect(() => {
     (() => {
-      const toShowProducts = data.filter(
+      setIsLoading(true);
+      const toShowProducts = products.filter(
         (product) =>
           product.category.includes(filters.category) &&
           wordExistenceChecker(product.title, filters.toSearchText),
       );
-      setProducts(toShowProducts);
+      setProductsToShow(toShowProducts);
+      setIsLoading(false);
     })();
-  }, [filters]);
+  }, [filters, products]);
 
   return (
     <productContext.Provider
       value={{
-        products,
+        isLoading,
+        productsToShow,
         filters,
         dispatch,
       }}

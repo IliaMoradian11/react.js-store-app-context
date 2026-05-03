@@ -11,7 +11,7 @@ const StyledDiv = styled.div({ display: "flex" });
 
 function ProductsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { products: productsToShow } = useProducts();
+  const { productsToShow } = useProducts();
 
   return (
     <Layout>

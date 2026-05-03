@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useProducts } from "../contexts/ProductContext";
 import { useCart } from "../contexts/CartContext";
 import { Link } from "react-router-dom";
 import { CgShoppingCart } from "react-icons/cg";
@@ -6,10 +7,12 @@ import { CgShoppingCart } from "react-icons/cg";
 import { buildCount } from "../helpers/cartDetails";
 
 import styles from "./Layout.module.css";
+import Loader from "../components/Loader";
 
 function Layout({ children }) {
   const { cart } = useCart();
   const [count, setCount] = useState(0);
+  const { isLoading } = useProducts();
 
   useEffect(() => {
     (async () => {
@@ -28,7 +31,7 @@ function Layout({ children }) {
           <CgShoppingCart size={30} color="#fe5d42" />
         </Link>
       </header>
-      {children}
+      {isLoading ? <Loader /> : children}
       <footer className={styles.footer}>Developed by Ilia with ❤️</footer>
     </>
   );

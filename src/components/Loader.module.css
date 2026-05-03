@@ -1,0 +1,8 @@
+.container {
+  min-height: calc(100vh - 240px);
+}
+.loader {
+  position: fixed;
+  top: calc(50vh - 50px);
+  left: calc(50vw - 50px);
+}
