@@ -1,22 +1,21 @@
-import { useContext, useEffect, useState } from "react";
-import { TbListDetails, TbShoppingBagCheck } from "react-icons/tb";
-import { BiMinus, BiPlus } from "react-icons/bi";
-import { CgTrashEmpty } from "react-icons/cg";
+import { useEffect, useState } from "react";
+import { useCart } from "../contexts/CartContext";
 import { Link } from "react-router-dom";
+import { TbListDetails } from "react-icons/tb";
 
-import { context } from "../contexts/SearchContext";
+import IncreaseDecreaseProduct from "./IncreaseDecreaseProduct";
 
 import styles from "./Product.module.css";
 
 function Product({ product }) {
   const [count, setCount] = useState(0);
-  const { dispatchCart, cart } = useContext(context);
+  const { dispatch, cart } = useCart();
   const { id, image, title, price } = product;
 
   useEffect(() => {
     (async () => {
-      const wProduct = cart.find((productI) => {
-        if (productI.id === id) return productI.count;
+      const wProduct = cart.find((i) => {
+        if (i.id === id) return i.count;
       });
       setCount(wProduct ? wProduct.count : 0);
     })();
@@ -31,35 +30,11 @@ function Product({ product }) {
         <Link to={`/products/${id}`}>
           <TbListDetails size={25} color="#fe5d42" />
         </Link>
-        <div>
-          {!!count && (
-            <>
-              <button
-                type="button"
-                onClick={() =>
-                  dispatchCart({ type: "remove", payload: product })
-                }
-              >
-                {count === 1 ? (
-                  <CgTrashEmpty size={25} color="#fff" />
-                ) : (
-                  <BiMinus size={25} color="#fff" />
-                )}
-              </button>
-              <span className={styles.count}>{count}</span>
-            </>
-          )}
-          <button
-            type="button"
-            onClick={() => dispatchCart({ type: "add", payload: product })}
-          >
-            {count ? (
-              <BiPlus size={25} color="#fff" />
-            ) : (
-              <TbShoppingBagCheck size={25} color="#fff" />
-            )}
-          </button>
-        </div>
+        <IncreaseDecreaseProduct
+          count={count}
+          dispatch={dispatch}
+          product={product}
+        />
       </div>
     </div>
   );

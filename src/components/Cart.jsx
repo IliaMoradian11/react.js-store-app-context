@@ -1,27 +1,41 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useReducer } from "react";
 import { Link } from "react-router-dom";
 import { PiEmpty } from "react-icons/pi";
 import { CgHashtag } from "react-icons/cg";
 import { BsPatchCheck } from "react-icons/bs";
 import { TbChecklist } from "react-icons/tb";
 
-import { context } from "../contexts/SearchContext";
+import { useCart } from "../contexts/CartContext";
+import { buildCount, buildTotalPrice } from "../helpers/cartDetails";
 
 import CartProduct from "../components/CartProduct";
 
 import styles from "./Cart.module.css";
 
+const initialState = { count: 0, total_price: 0 };
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "NEW_VALUE":
+      return action.payload;
+    default:
+      break;
+  }
+};
+
 function Cart() {
-  const { cart } = useContext(context);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [count, setCount] = useState(0);
+  const { cart } = useCart();
+  const [cartDetails, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     (async () => {
-      setTotalPrice(
-        cart.reduce((acc, cur) => (acc += cur.count * cur.price), 0),
-      );
-      setCount(cart.reduce((acc, cur) => (acc += cur.count), 0));
+      dispatch({
+        type: "NEW_VALUE",
+        payload: {
+          count: buildCount(cart),
+          total_price: buildTotalPrice(cart),
+        },
+      });
     })();
   }, [cart]);
 
@@ -33,12 +47,12 @@ function Cart() {
             <div>
               <TbChecklist color="#fe5d42" size={25} />
               <p>Total:</p>
-              <span>{totalPrice} $</span>
+              <span>{cartDetails.total_price} $</span>
             </div>
             <div>
               <CgHashtag color="#fe5d42" size={25} />
               <p>Quantity:</p>
-              <span>{count}</span>
+              <span>{cartDetails.count}</span>
             </div>
             <div>
               <BsPatchCheck color="#fe5d42" size={25} />

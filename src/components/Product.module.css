@@ -24,22 +24,6 @@
   align-items: center;
   justify-content: space-between;
 }
-.product div button {
-  background-color: #fe5d42;
-  border: none;
-  border-radius: 5px;
-  width: 32px;
-  height: 32px;
-  transition: all 0.2s ease-in-out;
-}
-.product div button:hover {
-  opacity: 0.8;
-}
-.product button,
 .product a {
   cursor: pointer;
-}
-.count {
-  font-size: 1rem;
-  margin: 0 15px;
 }

@@ -1,24 +1,26 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import ProductsPage from "./pages/ProductsPage";
 import PageNotFoundPage from "./pages/PageNotFoundPage";
-import SearchContext from "./contexts/SearchContext";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import CartPage from "./pages/CartPage";
 
+import ProductProvider from "./contexts/ProductContext";
+import CartProvider from "./contexts/CartContext";
+
 function App() {
   return (
-    <SearchContext>
-      <BrowserRouter>
+    <ProductProvider>
+      <CartProvider>
         <Routes>
           <Route index element={<Navigate to={"/products"} replace={true} />} />
           <Route path="products" element={<ProductsPage />} />
           <Route path="products/:id" element={<ProductDetailsPage />} />
-          <Route path="cart" element={<CartPage />} />
+          <Route path="checkout" element={<CartPage />} />
           <Route path="*" element={<PageNotFoundPage />} />
         </Routes>
-      </BrowserRouter>
-    </SearchContext>
+      </CartProvider>
+    </ProductProvider>
   );
 }
 

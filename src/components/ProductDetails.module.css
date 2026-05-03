@@ -42,7 +42,7 @@
   bottom: 25px;
   right: 25px;
   background-color: #fe5d42;
-  padding: 5px;
+  padding: 5px 10px;
   display: flex;
   align-items: center;
   border-radius: 5px;
@@ -51,4 +51,7 @@
 }
 .container a:hover {
   opacity: 0.8;
+}
+.container a svg {
+  margin-right: 5px;
 }

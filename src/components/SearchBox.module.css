@@ -12,7 +12,7 @@
   height: 37px;
   border: 2px dashed #fe5d42;
   border-radius: 5px;
-  padding: 8px;
+  padding: 8px 12px;
 }
 .searchBox input:focus {
   outline: none;

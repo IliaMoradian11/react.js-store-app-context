@@ -1,15 +1,15 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BiLeftArrowAlt } from "react-icons/bi";
 import { SiOpenproject } from "react-icons/si";
 import { IoMdPricetag } from "react-icons/io";
 
-import { context } from "../contexts/SearchContext";
+import { useProducts } from "../contexts/ProductContext";
 
 import styles from "./ProductDetails.module.css";
 
 function ProductDetails({ id }) {
-  const { products } = useContext(context);
+  const { products } = useProducts();
   const [product, setProduct] = useState({});
 
   useEffect(() => {
@@ -45,7 +45,7 @@ function ProductDetails({ id }) {
           </p>
         </div>
         <Link to="/products">
-          <BiLeftArrowAlt /> <span>Back to Shop</span>
+          <BiLeftArrowAlt size={20} /> <span>Back to Shop</span>
         </Link>
       </div>
     </div>

@@ -1,0 +1,18 @@
+.container button {
+  background-color: #fe5d42;
+  border: none;
+  border-radius: 5px;
+  width: 32px;
+  height: 32px;
+  transition: all 0.2s ease-in-out;
+}
+.container button:hover {
+  opacity: 0.8;
+}
+.container button {
+  cursor: pointer;
+}
+.count {
+  font-size: 1rem;
+  margin: 0 15px;
+}

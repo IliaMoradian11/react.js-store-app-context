@@ -1,38 +1,28 @@
-import { useContext, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 
-import { context } from "../contexts/SearchContext";
+import { useProducts } from "../contexts/ProductContext";
+import { buildQueryParams, changeQueryParams } from "../helpers/changeQuery";
 
 import styles from "./SearchBox.module.css";
 
 function SearchBox({ searchParams, setSearchParams }) {
-  const { search, dispatchSearch, category, setToSearchText } =
-    useContext(context);
+  const [search, setSearch] = useState("");
+  const { filters, dispatch } = useProducts();
 
   useEffect(() => {
     const searchQuery = searchParams.get("search");
-    if (searchQuery) {
-      dispatchSearch({ type: "setNewValue", payload: searchQuery });
-      setToSearchText(searchQuery);
-    }
+    changeQueryParams("search", searchQuery, dispatch, setSearch);
   }, []);
 
   function inputChangeHandler(e) {
-    dispatchSearch({ type: "setNewValue", payload: e.target.value });
+    setSearch(e.target.value);
   }
 
   function searchHandler(e) {
     e.preventDefault();
-    if (search && category) {
-      setSearchParams({ category, search });
-    } else if (search) {
-      setSearchParams({ search });
-    } else if (category) {
-      setSearchParams({ category });
-    } else {
-      setSearchParams({});
-    }
-    setToSearchText(search);
+    setSearchParams(buildQueryParams({ category: filters.category, search }));
+    dispatch({ type: "SEARCH", payload: search });
   }
 
   return (
