@@ -1,12 +1,15 @@
+// libraries
 import { Navigate, Route, Routes } from "react-router-dom";
 
+// contexts
+import ProductProvider from "./contexts/ProductContext";
+import CartProvider from "./contexts/CartContext";
+
+// pages
 import ProductsPage from "./pages/ProductsPage";
 import PageNotFoundPage from "./pages/PageNotFoundPage";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import CartPage from "./pages/CartPage";
-
-import ProductProvider from "./contexts/ProductContext";
-import CartProvider from "./contexts/CartContext";
 
 function App() {
   return (

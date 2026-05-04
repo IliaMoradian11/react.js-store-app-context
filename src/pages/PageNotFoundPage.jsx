@@ -1,3 +1,4 @@
+// components
 import PageNotFound from "../components/404NotFound";
 
 function PageNotFoundPage() {

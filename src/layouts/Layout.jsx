@@ -1,24 +1,24 @@
-import { useEffect, useState } from "react";
-import { useProducts } from "../contexts/ProductContext";
-import { useCart } from "../contexts/CartContext";
+// libraries
 import { Link } from "react-router-dom";
+
+// icons
 import { CgShoppingCart } from "react-icons/cg";
 
-import { buildCount } from "../helpers/cartDetails";
+// custom hooks
+import { useProducts } from "../contexts/ProductContext";
+import { useCart } from "../contexts/CartContext";
 
-import styles from "./Layout.module.css";
+// components
 import Loader from "../components/Loader";
 
-function Layout({ children }) {
-  const { cart } = useCart();
-  const [count, setCount] = useState(0);
-  const { isLoading } = useProducts();
+// styles
+import styles from "./Layout.module.css";
 
-  useEffect(() => {
-    (async () => {
-      setCount(buildCount(cart));
-    })();
-  }, [cart]);
+function Layout({ children }) {
+  const {
+    cart: { totalCount },
+  } = useCart();
+  const { isLoading } = useProducts();
 
   return (
     <>
@@ -27,7 +27,7 @@ function Layout({ children }) {
           <h1>Store</h1>
         </Link>
         <Link to="/checkout" className={styles.linkToCart}>
-          {!!count && <span className={styles.count}>{count}</span>}
+          {!!totalCount && <span className={styles.count}>{totalCount}</span>}
           <CgShoppingCart size={30} color="#fe5d42" />
         </Link>
       </header>

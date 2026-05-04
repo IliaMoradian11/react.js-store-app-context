@@ -1,9 +1,16 @@
+// react
 import { useEffect, useState } from "react";
+
+// icons
 import { BiSearch } from "react-icons/bi";
 
+// custom hooks
 import { useProducts } from "../contexts/ProductContext";
+
+// helper functions
 import { buildQueryParams, changeQueryParams } from "../helpers/changeQuery";
 
+// styles
 import styles from "./SearchBox.module.css";
 
 function SearchBox({ searchParams, setSearchParams }) {
@@ -15,14 +22,22 @@ function SearchBox({ searchParams, setSearchParams }) {
     changeQueryParams("search", searchQuery, dispatch, setSearch);
   }, []);
 
-  function inputChangeHandler(e) {
-    setSearch(e.target.value);
+  function searchHandler(e) {
+    let toSearch;
+    if (typeof e === "object") {
+      e.preventDefault();
+      toSearch = search;
+    } else {
+      toSearch = e;
+    }
+    setSearchParams(buildQueryParams(filters.category, toSearch));
+    dispatch({ type: "SEARCH", payload: toSearch });
   }
 
-  function searchHandler(e) {
-    e.preventDefault();
-    setSearchParams(buildQueryParams(filters.category, search));
-    dispatch({ type: "SEARCH", payload: search });
+  function inputChangeHandler(e) {
+    const value = e.target.value;
+    setSearch(value);
+    if (!value) searchHandler(value);
   }
 
   return (

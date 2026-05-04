@@ -1,6 +1,8 @@
-import styles from "./ProductsContainer.module.css";
-
+// components
 import Product from "./Product";
+
+// styles
+import styles from "./ProductsContainer.module.css";
 
 function ProductsContainer({ productsToShow }) {
   return (

@@ -1,4 +1,7 @@
+// layout
 import Layout from "../layouts/Layout";
+
+// components
 import Cart from "../components/Cart";
 
 function CartPage() {

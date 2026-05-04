@@ -1,13 +1,16 @@
+// libraries
 import { useSearchParams } from "react-router-dom";
-import styled from "styled-components";
 
+// custom hooks
+import { useProducts } from "../contexts/ProductContext";
+
+// layout
 import Layout from "../layouts/Layout";
+
+// components
 import SearchBox from "../components/SearchBox";
 import ProductsContainer from "../components/ProductsContainer";
 import FilterProducts from "../components/FilterProducts";
-import { useProducts } from "../contexts/ProductContext";
-
-const StyledDiv = styled.div({ display: "flex" });
 
 function ProductsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -19,13 +22,13 @@ function ProductsPage() {
         searchParams={searchParams}
         setSearchParams={setSearchParams}
       />
-      <StyledDiv>
+      <div style={{ display: "flex" }}>
         <ProductsContainer productsToShow={productsToShow} />
         <FilterProducts
           searchParams={searchParams}
           setSearchParams={setSearchParams}
         />
-      </StyledDiv>
+      </div>
     </Layout>
   );
 }

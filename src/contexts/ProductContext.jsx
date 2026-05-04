@@ -1,3 +1,4 @@
+// react
 import {
   useContext,
   useEffect,
@@ -6,18 +7,23 @@ import {
   createContext,
 } from "react";
 
+// axios
 import api from "../services/config";
 
+// helper functions
 import {
   categoryChecker,
   wordExistenceChecker,
 } from "../helpers/wordExistence&CategoryChecker";
 
-const productContext = createContext();
+// context
+const ProductContext = createContext();
 
+// constants
 const initialState = { toSearchText: "", category: "all" };
 
-function reducer(state, action) {
+// reducer function
+const reducer = (state, action) => {
   switch (action.type) {
     case "SEARCH":
       return { ...state, toSearchText: action.payload };
@@ -26,6 +32,11 @@ function reducer(state, action) {
     default:
       throw new Error("The value you pass to reducer is not valid");
   }
+};
+
+// custom hooks
+function useProducts() {
+  return useContext(ProductContext);
 }
 
 function ProductProvider({ children }) {
@@ -37,7 +48,7 @@ function ProductProvider({ children }) {
   useEffect(() => {
     (async () => {
       try {
-        setProducts(await api.get("/products/products.json"));
+        setProducts(await api.get("/products"));
       } catch (error) {
         alert(error);
       } finally {
@@ -60,21 +71,18 @@ function ProductProvider({ children }) {
   }, [filters, products]);
 
   return (
-    <productContext.Provider
+    <ProductContext.Provider
       value={{
         isLoading,
         productsToShow,
         filters,
         dispatch,
+        products,
       }}
     >
       {children}
-    </productContext.Provider>
+    </ProductContext.Provider>
   );
-}
-
-function useProducts() {
-  return useContext(productContext);
 }
 
 export { useProducts, ProductProvider as default };

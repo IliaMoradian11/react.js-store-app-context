@@ -24,21 +24,21 @@
   opacity: 0.9;
 }
 .header .linkToCart .count {
-  font-size: smaller;
+  font-size: 0.8rem;
   position: absolute;
   right: 0;
   top: 0;
   color: #fff;
   background-color: #000;
-  border-radius: 11px;
-  min-width: 22px;
-  line-height: 22px;
-  height: 22px;
+  border-radius: 10px;
+  min-width: 20px;
+  line-height: 20px;
+  height: 20px;
   text-align: center;
   transform: translate(50%, -50%);
 }
 .footer {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   text-align: center;
   margin-top: 100px;
 }

@@ -1,7 +1,9 @@
+// icons
 import { TbShoppingBagCheck } from "react-icons/tb";
 import { BiMinus, BiPlus } from "react-icons/bi";
 import { CgTrashEmpty } from "react-icons/cg";
 
+// styles
 import styles from "./IncreaseDecreaseProduct.module.css";
 
 function IncreaseDecreaseProduct({ count, dispatch, product }) {
@@ -11,7 +13,7 @@ function IncreaseDecreaseProduct({ count, dispatch, product }) {
         <>
           <button
             type="button"
-            onClick={() => dispatch({ type: "DECREASE", payload: product })}
+            onClick={() => dispatch({ type: "REMOVE_ITEM", payload: product })}
           >
             {count === 1 ? (
               <CgTrashEmpty size={25} color="#fff" />
@@ -24,7 +26,7 @@ function IncreaseDecreaseProduct({ count, dispatch, product }) {
       )}
       <button
         type="button"
-        onClick={() => dispatch({ type: "INCREASE", payload: product })}
+        onClick={() => dispatch({ type: "ADD_ITEM", payload: product })}
       >
         {count ? (
           <BiPlus size={25} color="#fff" />

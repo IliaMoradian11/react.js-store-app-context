@@ -1,23 +1,31 @@
+// react
 import { useEffect, useState } from "react";
+
+// custom hooks
 import { useCart } from "../contexts/CartContext";
 
+// components
 import IncreaseDecreaseProduct from "../components/IncreaseDecreaseProduct";
 
+//styles
 import styles from "./CartProduct.module.css";
 
 function CartProduct({ product }) {
   const [count, setCount] = useState(0);
-  const { cart, dispatch } = useCart();
+  const {
+    cart: { products: cartProducts },
+    dispatch,
+  } = useCart();
   const { id, image, title } = product;
 
   useEffect(() => {
     (async () => {
-      const wProduct = cart.find((p) => {
+      const thisProduct = cartProducts.find((p) => {
         if (p.id === id) return true;
       });
-      setCount(wProduct ? wProduct.count : 0);
+      setCount(thisProduct ? thisProduct.count : 0);
     })();
-  }, [cart]);
+  }, [cartProducts]);
 
   return (
     <div className={styles.product}>

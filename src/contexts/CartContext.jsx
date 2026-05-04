@@ -1,54 +1,71 @@
+// react
 import { createContext, useContext, useReducer } from "react";
 
-const cartContext = createContext();
+// helper functions
+import { buildCount, buildTotalPrice } from "../helpers/cartDetails";
 
+// context
+const CartContext = createContext();
+
+// contants
+const initialState = { products: [], totalCount: 0, totalPrice: 0 };
+
+// reducer functions
 const addProduct = (state, action) => {
-  const isAvailable = !!state.find(
+  const isAvailable = !!state.products.find(
     (product) => product.id === action.payload.id,
   );
-  const newValue = isAvailable
-    ? state.map((product) => {
+  const newProducts = isAvailable
+    ? state.products.map((product) => {
         if (product.id !== action.payload.id) return product;
         return { ...product, count: product.count + 1 };
       })
-    : [...state, { ...action.payload, count: 1 }];
-  return newValue;
+    : [...state.products, { ...action.payload, count: 1 }];
+  const totalCount = buildCount(newProducts);
+  const totalPrice = buildTotalPrice(newProducts);
+  return { products: newProducts, totalCount, totalPrice };
 };
 
 const removeProduct = (state, action) => {
   const isCountOne =
-    state.find((product) => product.id === action.payload.id).count === 1;
-  const newValue = isCountOne
-    ? state.filter((product) => product.id !== action.payload.id)
-    : state.map((product) => {
+    state.products.find((product) => product.id === action.payload.id).count ===
+    1;
+  const newProducts = isCountOne
+    ? state.products.filter((product) => product.id !== action.payload.id)
+    : state.products.map((product) => {
         if (product.id !== action.payload.id) return product;
         return { ...product, count: product.count - 1 };
       });
-  return newValue;
+  const totalCount = buildCount(newProducts);
+  const totalPrice = buildTotalPrice(newProducts);
+  return { products: newProducts, totalCount, totalPrice };
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "INCREASE":
+    case "ADD_ITEM":
       return addProduct(state, action);
-    case "DECREASE":
+    case "REMOVE_ITEM":
       return removeProduct(state, action);
+    case "CHECK_OUT":
+      return initialState;
     default:
       throw new Error("The value you pass to reducer is not valid");
   }
 };
 
+// custom hooks
 const useCart = () => {
-  return useContext(cartContext);
+  return useContext(CartContext);
 };
 
 function CartProvider({ children }) {
-  const [cart, dispatch] = useReducer(reducer, []);
+  const [cart, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <cartContext.Provider value={{ cart, dispatch }}>
+    <CartContext.Provider value={{ cart, dispatch }}>
       {children}
-    </cartContext.Provider>
+    </CartContext.Provider>
   );
 }
 

@@ -1,5 +1,7 @@
+// libraries
 import { useNavigate } from "react-router-dom";
 
+// styles
 import styles from "./404NotFound.module.css";
 
 function PageNotFound() {
