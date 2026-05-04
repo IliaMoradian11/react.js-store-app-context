@@ -21,7 +21,7 @@ function SearchBox({ searchParams, setSearchParams }) {
 
   function searchHandler(e) {
     e.preventDefault();
-    setSearchParams(buildQueryParams({ category: filters.category, search }));
+    setSearchParams(buildQueryParams(filters.category, search));
     dispatch({ type: "SEARCH", payload: search });
   }
 

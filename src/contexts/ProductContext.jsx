@@ -36,7 +36,13 @@ function ProductProvider({ children }) {
 
   useEffect(() => {
     (async () => {
-      setProducts(await api.get("/products/products.json"));
+      try {
+        setProducts(await api.get("/products/products.json"));
+      } catch (error) {
+        alert(error);
+      } finally {
+        setIsLoading(false);
+      }
     })();
   }, []);
 

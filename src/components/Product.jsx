@@ -14,8 +14,8 @@ function Product({ product }) {
 
   useEffect(() => {
     (async () => {
-      const wProduct = cart.find((i) => {
-        if (i.id === id) return i.count;
+      const wProduct = cart.find((p) => {
+        if (p.id === id) return true;
       });
       setCount(wProduct ? wProduct.count : 0);
     })();

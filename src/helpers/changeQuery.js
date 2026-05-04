@@ -1,4 +1,4 @@
-function buildQueryParams({ category, search }) {
+function buildQueryParams(category, search) {
   let searchParams;
   if (search && category !== "all") {
     searchParams = { category, search };

@@ -19,9 +19,7 @@ function FilterProducts({ searchParams, setSearchParams }) {
     if (e.target.tagName !== "BUTTON") return;
     const value = e.target.innerText.toLowerCase();
     dispatch({ type: "CATEGORY", payload: value });
-    setSearchParams(
-      buildQueryParams({ search: filters.toSearchText, category: value }),
-    );
+    setSearchParams(buildQueryParams(value, filters.toSearchText));
   }
 
   function isActive(type) {
