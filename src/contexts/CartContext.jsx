@@ -1,5 +1,5 @@
 // react
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer, useEffect } from "react";
 
 // helper functions
 import { buildCount, buildTotalPrice } from "../helpers/cartDetails";
@@ -49,6 +49,8 @@ const reducer = (state, action) => {
       return removeProduct(state, action);
     case "CHECK_OUT":
       return initialState;
+    case "NEW_VALUE":
+      return action.payload;
     default:
       throw new Error("The value you pass to reducer is not valid");
   }
@@ -61,6 +63,17 @@ const useCart = () => {
 
 function CartProvider({ children }) {
   const [cart, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    const lsCart = JSON.parse(localStorage.getItem("cart")); // lsCart = localStorageCart
+    if (lsCart) {
+      dispatch({ type: "NEW_VALUE", payload: lsCart });
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   return (
     <CartContext.Provider value={{ cart, dispatch }}>
